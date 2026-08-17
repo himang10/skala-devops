@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: sk199-helm-git-repo
+  namespace: skala-argocd
+  labels:
+    argocd.argoproj.io/secret-type: repository
+type: Opaque
+stringData:
+  name: sk199-helm-my-app
+  type: git
+  url: https://github.com/himang10/myfirst-api-server.git
+  username: himang10
+  project: skala
+  password: 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

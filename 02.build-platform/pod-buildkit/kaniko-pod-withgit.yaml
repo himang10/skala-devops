@@ -1,0 +1,63 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: sk199-buildkit-pod-springboot
+  namespace: skala-practice
+  labels:
+    app: sk199
+spec:
+  # Init Container: Maven 빌드
+  initContainers:
+  - name: build
+    image: maven:3.8.5-openjdk-17
+    workingDir: /workspace
+    command: ["/bin/bash"]
+    args:
+      - -c
+      - |
+        echo "=== Git Clone 시작 ==="
+        git clone https://himang10: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@github.com/himang10/myfirst-api-server.git .
+        echo "=== Maven 빌드 시작 ==="
+        mvn clean install -DskipTests
+        echo "=== 빌드 완료 ==="
+        ls -al
+
+    volumeMounts:
+      - name: workspace
+        mountPath: /workspace
+
+  # Main Container: BuildKit 빌드
+  containers:
+  - name: buildkit
+    image: moby/buildkit:rootless
+    command: ["buildctl-daemonless.sh"]
+    args:
+      - build
+      - --frontend=dockerfile.v0
+      - --local=context=/workspace
+      - --local=dockerfile=/workspace
+      - --opt=platform=linux/arm64,linux/amd64
+      - --output=type=image,name=amdp-registry.skala-ai.com/skala25a/sk199-myfirst-api-server:1.0.0.spring-buildkit-kube,push=true
+    env:
+      - name: DOCKER_CONFIG
+        value: /home/user/.docker
+    securityContext:
+      seccompProfile:
+        type: Unconfined
+    volumeMounts:
+      - name: workspace
+        mountPath: /workspace
+      - name: buildkit-secret
+        mountPath: /home/user/.docker
+        readOnly: true
+
+  restartPolicy: Never
+  volumes:
+    - name: workspace
+      emptyDir: {}
+    - name: buildkit-secret
+      secret:
+        secretName: harbor-registry-secret
+        items:
+          - key: .dockerconfigjson
+            path: config.json
