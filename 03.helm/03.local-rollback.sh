@@ -7,9 +7,9 @@
 
 set -xeu
 
-USER_NAME="sk199"
-RELEASE_NAME="${USER_NAME}-myfirst-api"
-NAMESPACE="skala-practice"
+USER_NAME="${STUDENT_NUM}"           # 리소스 이름 prefix
+RELEASE_NAME="${USER_NAME}-myfirst-helm"
+NAMESPACE="${CLASS-NAME}"
 
 # ── 1) 롤백 전 히스토리 확인 ─────────────────────────────────
 echo "=== 롤백 전 히스토리 ==="

@@ -8,10 +8,10 @@
 
 set -xeu
 
-USER_NAME="sk199"
-RELEASE_NAME="${USER_NAME}-myfirst-api"
-NAMESPACE="skala-practice"
-CHART_DIR="./myfirst-api-server"
+USER_NAME="${STUDENT_NUM}"           # 리소스 이름 prefix
+RELEASE_NAME="${USER_NAME}-myfirst-helm"
+NAMESPACE="${CLASS-NAME}"
+CHART_DIR="./myfirst-helmchart"    # 로컬 chart 경로
 
 # ── 1) 업그레이드 전 현재 릴리즈 히스토리 확인 ──────────────
 echo "=== 업그레이드 전 히스토리 ==="
@@ -21,10 +21,10 @@ helm history ${RELEASE_NAME} -n ${NAMESPACE}
 # -f values-2.0.0.yaml → image.tag=2.0.0, replicaCount=2 오버라이드
 helm upgrade ${RELEASE_NAME} ${CHART_DIR} \
   --namespace ${NAMESPACE} \
-  --set userName=${USER_NAME} \
-  -f ${CHART_DIR}/values-2.0.0.yaml \
   --atomic \
-  --timeout 3m
+  --reuse-values \
+  --timeout 3m \
+  -f ./skala-value/skala-values-2.0.yaml
 
 # ── 3) 업그레이드 후 확인 ────────────────────────────────────
 echo ""

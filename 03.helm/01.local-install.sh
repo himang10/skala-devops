@@ -7,18 +7,18 @@
 
 set -xeu
 
-USER_NAME="sk199"           # 리소스 이름 prefix
-RELEASE_NAME="${USER_NAME}-myfirst-api"
-NAMESPACE="skala-practice"
-CHART_DIR="./myfirst-api-server"    # 로컬 chart 경로
+USER_NAME="${STUDENT_NUM}"           # 리소스 이름 prefix
+RELEASE_NAME="${USER_NAME}-myfirst-helm"
+NAMESPACE="${CLASS-NAME}"
+CHART_DIR="./myfirst-helmchart"    # 로컬 chart 경로
 
 # ── 1) 설치 (이미 있으면 upgrade, 없으면 install) ────────────
 # -f values.yaml  → image.tag = 1.0.0 (기본값)
 helm upgrade --install ${RELEASE_NAME} ${CHART_DIR} \
   --namespace ${NAMESPACE} \
-  --set userName=${USER_NAME} \
   --atomic \
-  --timeout 3m
+  --timeout 3m \
+  -f ./skala-value/skala-values.yaml
 
 # ── 3) 설치 결과 확인 ────────────────────────────────────────
 echo ""

@@ -11,6 +11,6 @@ config:
   key2: value2
 
 service:
-  enabled: true
+  enabled: false
 
 adminUser: admin

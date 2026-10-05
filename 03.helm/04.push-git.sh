@@ -9,21 +9,24 @@
 
 set -xeu
 
-BRANCH="main"
-CHART_NAME="myfirst-api-server"
-CHART_VERSION="0.0.2"
-CHART_DIR="./myfirst-api-server"
-
 # GitHub Pages Helm repo 로컬 경로 (git clone된 위치)
 PAGES_URL="https://himang10.github.io/mycharts"
+BRANCH="main"
+
+USER_NAME="${STUDENT_NUM}"           # 리소스 이름 prefix
+CHART_NAME="${USER_NAME}-myfirst-helm"
+CHART_VERSION="0.0.2"
+CHART_DIR="./myfirst-helmchart"    # 로컬 chart 경로
+NAMESPACE="${CLASS-NAME}"
+
+
 
 # ── 1) 차트 패키징 (.tgz 생성) ───────────────────────────────
 helm package ${CHART_DIR} --version ${CHART_VERSION}
-CHART_PKG="${CHART_NAME}-${CHART_VERSION}.tgz"
+echo "=== 생성된 .tgz 파일 ==="
+ls "${CHART_NAME}-${CHART_VERSION}.tgz"
 
-# ── 2) .tgz를 git repo 디렉토리로 복사 ───────────────────────
-
-# ── 3) index.yaml 생성 (base url 포함) ───────────────────────
+# ── 2) index.yaml 생성 (base url 포함) ───────────────────────
 # index.yaml: 이 repo에 있는 모든 .tgz를 스캔해 chart 목록 생성
 # --url: helm repo add 시 .tgz를 다운로드할 base URL
 helm repo index . --url ${PAGES_URL}
@@ -32,7 +35,7 @@ echo ""
 echo "=== 생성된 index.yaml 내용 ==="
 cat index.yaml
 
-# ── 4) git push → GitHub Pages 배포 ─────────────────────────
+# ── 3) git push → GitHub Pages 배포 ─────────────────────────
 git add .
 git commit -m "add ${CHART_NAME}-${CHART_VERSION}"
 git push origin ${BRANCH}
