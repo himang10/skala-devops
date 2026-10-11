@@ -1,7 +1,7 @@
 # MariaDB Helm Chart values.yaml 구성 (Debezium CDC 지원)
 ## 전역 설정
 global:
-  storageClass: "gp2"
+  storageClass: "gp3"
   security:
     allowInsecureImages: true
 

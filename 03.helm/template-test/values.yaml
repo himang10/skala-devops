@@ -14,3 +14,13 @@ service:
   enabled: false
 
 adminUser: admin
+
+# with
+resources: {}
+
+# range
+envs:
+  - name: ENV1
+    value: "value1"
+  - name: ENV2
+    value: "value2"
