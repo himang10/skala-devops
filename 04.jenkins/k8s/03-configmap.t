@@ -10,7 +10,7 @@ data:
   jenkins.yaml: |
     jenkins:
       systemMessage: "SKALA DevOps Study - Jenkins CI/CD (Multi-User)"
-      numExecutors: 2
+      numExecutors: 1
       mode: NORMAL
     
       securityRealm:
