@@ -120,6 +120,50 @@ jenkins:
               - "View/Read"
             entries:
               - user: "skala04"
+          - name: "folder-owner-skala05"
+            description: "skala05 전용 폴더 관리 권한"
+            pattern: "skala05(/.*)?"
+            permissions:
+              - "Job/Build"
+              - "Job/Cancel"
+              - "Job/Configure"
+              - "Job/Create"
+              - "Job/Delete"
+              - "Job/Discover"
+              - "Job/Read"
+              - "Job/Workspace"
+              - "Run/Delete"
+              - "Run/Replay"
+              - "Run/Update"
+              - "View/Configure"
+              - "View/Create"
+              - "View/Delete"
+              - "View/Read"
+            entries:
+              - user: "skala05"
+          - name: "folder-owner-skala06"
+            description: "skala06 전용 폴더 관리 권한"
+            pattern: "skala06(/.*)?"
+            permissions:
+              - "Job/Build"
+              - "Job/Cancel"
+              - "Job/Configure"
+              - "Job/Create"
+              - "Job/Delete"
+              - "Job/Discover"
+              - "Job/Read"
+              - "Job/Workspace"
+              - "Run/Delete"
+              - "Run/Replay"
+              - "Run/Update"
+              - "View/Configure"
+              - "View/Create"
+              - "View/Delete"
+              - "View/Read"
+            entries:
+              - user: "skala06"
+
+
 
 credentials:
   system:
@@ -145,7 +189,7 @@ credentials:
 
 jobs:
   - script: |
-      ['skala01', 'skala02', 'skala03', 'skala04'].each { userId ->
+      ['skala01', 'skala02', 'skala03', 'skala04', 'skala05', 'skala06'].each { userId ->
         folder(userId) {
           description(userId + " 전용 CI/CD 작업 공간\n이 폴더 안에 Pipeline Job 을 생성하세요.")
           displayName(userId + " Workspace")
