@@ -101,21 +101,13 @@ EOF
 
             IMAGE_BASE="${IMAGE_REGISTRY_URL}/${IMAGE_REGISTRY_PROJECT}/${IMAGE_NAME}"
 
-            # 1. 원격 gitops 브랜치가 있으면 그 히스토리를 이어받고, 없으면 현재 브랜치 기준으로 생성
-            git fetch origin "${GITOPS_BRANCH}" || true
-            if git rev-parse --verify "origin/${GITOPS_BRANCH}" >/dev/null 2>&1; then
-              git checkout -B "${GITOPS_BRANCH}" "origin/${GITOPS_BRANCH}"
-            else
-              git checkout -B "${GITOPS_BRANCH}"
-            fi
-
-            # 2. kustomize/overlays/dev 이미지 태그 업데이트 (이후 명령은 원래 디렉토리에서 실행해야 하므로 서브셸 사용)
+            # 1. GIT_BRANCH(현재 체크아웃된 소스) 기준으로 kustomize 이미지 태그 업데이트
             (cd "${GITOPS_MANIFEST_DIR}" && kustomize edit set image "${IMAGE_BASE}=${IMAGE_BASE}:${FINAL_IMAGE_TAG}")
 
-            # 3. 커밋 & 푸시 (원격 히스토리를 이어받았으므로 fast-forward push, --force 불필요)
+            # 2. 커밋 후 GITOPS_BRANCH로 push (GIT_BRANCH 기준으로 덮어쓰므로 --force 필요)
             git add "${GITOPS_MANIFEST_DIR}/kustomization.yaml"
             git commit -m "[AUTO] image: ${IMAGE_NAME}:${FINAL_IMAGE_TAG}"
-            git push origin "${GITOPS_BRANCH}"
+            git push --force origin "HEAD:refs/heads/${GITOPS_BRANCH}"
             echo "[DONE] gitops 브랜치 업데이트 완료: ${IMAGE_BASE}:${FINAL_IMAGE_TAG}"
           '''
         }
