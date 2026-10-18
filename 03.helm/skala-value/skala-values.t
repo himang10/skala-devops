@@ -8,7 +8,7 @@ image:
   repository: skala-registry.skala-{{LOCATION}}.com/{{NAMESPACE}}/{{USER_NAME}}-webserver
   pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "1.0"
+  tag: "1.0.buildkit-pod"
 
 imagePullSecrets: []
 nameOverride: ""
