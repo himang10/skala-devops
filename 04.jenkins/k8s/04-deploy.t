@@ -53,6 +53,9 @@ spec:
           volumeMounts:
             - name: jenkins-home
               mountPath: /var/jenkins_home
+            - name: jenkins-home
+              mountPath: /root/.m2
+              subPath: .m2
             - name: jenkins-config
               mountPath: /var/jenkins_config
 
