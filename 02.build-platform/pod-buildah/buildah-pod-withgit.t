@@ -18,8 +18,8 @@ spec:
         echo "=== Git Clone 시작 ==="
         git clone https://{{GIT_USERNAME}}:{{GIT_PASSWORD}}@{{GIT_REPO_URL}} .
         echo "=== Maven 빌드 시작 ==="
-        mvn clean install -DskipTests
-        # mvn -s settings.xml clean install -DskipTests
+        # mvn clean install -DskipTests
+        mvn -s settings.xml clean install -DskipTests
         echo "=== 빌드 완료 ==="
         ls -al
 

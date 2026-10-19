@@ -32,7 +32,8 @@ pipeline {
     stage('Build with Maven') {
       steps {
         echo 'Build with Maven'
-        sh 'mvn clean package -DskipTests'
+        sh 'mvn -s settings.xml clean package -DskipTests'
+        // sh 'mvn clean package -DskipTests'
         sh 'ls -al'
       }
     }
