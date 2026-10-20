@@ -11,6 +11,8 @@ metadata:
     update: {{HASHCODE}}
   name: {{USER_NAME}}-{{SERVICE_NAME}}
   namespace: {{NAMESPACE}}
+  labels:
+    app: {{USER_NAME}}-{{SERVICE_NAME}}
 spec:
   replicas: 1
   selector:
