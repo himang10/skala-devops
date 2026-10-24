@@ -35,4 +35,4 @@ dist
 **/jenkins_home/*
 !jenkins_home/.gitkeep
 
-env.properties
+env.properties.example
