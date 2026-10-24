@@ -18,4 +18,4 @@ patches:
 #     {{DOCKER_REGISTRY}}/{{PROJECT_NAME}}/{{USER_NAME}}-webserver={{DOCKER_REGISTRY}}/{{PROJECT_NAME}}/{{USER_NAME}}-webserver:<NEW_TAG>
 images:
 - name: {{DOCKER_REGISTRY}}/{{PROJECT_NAME}}/{{USER_NAME}}-webserver
-  newTag: "1.0"
+  newTag: "1.0.docker"
