@@ -2,7 +2,7 @@
 
 내 PC(Docker)에서 **소스 Clone → Maven 빌드 → 컨테이너 이미지 빌드/Push → Kustomize 이미지 태그 갱신 → 내 네임스페이스에 배포 → 배포 확인**까지 한 번에 실습합니다.
 
-이미지를 만들어 레지스트리에 올리는 앞부분(1~4단계, CI)은 [`02.build-platform/local-build`](../../02.build-platform/local-build/README.md)와 같고, <br>여기서는 **5~6단계(Kustomize 갱신 + Kubernetes 배포, CD)** 가 추가됩니다.
+이미지를 만들어 레지스트리에 올리는 앞부분(1~4단계, CI)은 [`02.build-platform/local-build`](../../02.build-platform/local-build/README.md)와 같고, <br> 여기서는 **5~6단계(Kustomize 갱신 + Kubernetes 배포, CD)** 가 추가됩니다.
 
 | 스크립트 | 빌드 도구 | 이미지 태그 예시 | 대상 플랫폼 |
 |---|---|---|---|

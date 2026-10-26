@@ -12,7 +12,7 @@ Spring Boot, Vue.js, Python, MariaDB 4개 애플리케이션을 **Helm Chart**�
 ```
 03.helm-umbrella/
 ├── 01.umbrella-chart/   # Umbrella Helm Chart (핵심 실습)
-└── 02.apps/             # 개별 앱 소스 및 원본 K8s 매니페스트 참고용
+└── 02.container-build-app/             # 개별 앱 소스 및 원본 K8s 매니페스트 참고용
     ├── 01.springboot/
     ├── 02.vuejs/
     ├── 03.python/
@@ -106,7 +106,7 @@ mariadb:
 
 ---
 
-## 02.apps — 개별 앱 원본 (참고용)
+## 02.container-build-app — 개별 앱 원본 (참고용)
 
 각 서비스의 소스코드, Dockerfile, 원본 K8s 매니페스트가 있습니다.  
 `01.umbrella-chart`의 Helm 템플릿을 이해하거나 개별 배포가 필요할 때 참고합니다.
@@ -122,16 +122,16 @@ mariadb:
 
 ```bash
 # Spring Boot
-cd 02.apps/01.springboot && ./docker-build.sh && ./docker-push.sh
+cd 02.container-build-app/01.springboot && ./docker-build.sh && ./docker-push.sh
 
 # Vue.js
-cd 02.apps/02.vuejs && ./docker-build.sh && ./docker-push.sh
+cd 02.container-build-app/02.vuejs && ./docker-build.sh && ./docker-push.sh
 
 # Python (Dockerfile 지정 가능)
-cd 02.apps/03.python && ./docker-build.sh              # 기본 Dockerfile
-cd 02.apps/03.python && ./docker-build.sh -f Dockerfile.base  # 베이스 이미지 빌드
+cd 02.container-build-app/03.python && ./docker-build.sh              # 기본 Dockerfile
+cd 02.container-build-app/03.python && ./docker-build.sh -f Dockerfile.base  # 베이스 이미지 빌드
 
 # MariaDB (Helm 단독 설치)
-cd 02.apps/04.mariadb && ./install.sh
+cd 02.container-build-app/04.mariadb && ./install.sh
 ```
 

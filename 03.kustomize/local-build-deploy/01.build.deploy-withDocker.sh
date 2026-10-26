@@ -112,7 +112,8 @@ step5_update_kustomize_manifest() {
 step6_deploy_to_kubernetes() {
   echo "=== [6/6] Kubernetes 배포 ==="
 
-  kustomize build ./kustomize/overlays/dev | kubectl apply -n "${K8S_NAMESPACE}" -f -
+  # kustomize build ./kustomize/overlays/dev | kubectl apply -n "${K8S_NAMESPACE}" -f -
+  kubectl apply -k ./kustomize/overlays/dev -n "${K8S_NAMESPACE}"
   kubectl rollout status "deployment/${DEPLOYMENT_NAME}" \
     -n "${K8S_NAMESPACE}" \
     --timeout=180s

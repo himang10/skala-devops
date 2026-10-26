@@ -1,0 +1,24 @@
+{{- if .Values.ingress.enabled }}
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ include "vuejs.appName" . }}
+  namespace: {{ .Values.global.namespace }}
+spec:
+  ingressClassName: public-nginx
+  rules:
+  - host: {{ include "vuejs.userPrefix" . }}-ingress.{{ .Values.global.springboot.ingress.baseDomain }}
+    http:
+      paths:
+      - backend:
+          service:
+            name: {{ include "vuejs.appName" . }}
+            port:
+              number: {{ .Values.vuejs.service.port }}
+        path: /api
+        pathType: Prefix
+  tls:
+  - hosts:
+    - {{ printf "%s-ingress.%s" (include "vuejs.userPrefix" .) .Values.global.springboot.ingress.baseDomain | quote }}
+    secretName: wildcard-{{ .Values.global.namespace }}-skala-{{ .Values.global.location }}-com-tls
+{{- end }}
