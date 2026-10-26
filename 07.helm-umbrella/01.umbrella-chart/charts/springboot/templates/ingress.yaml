@@ -5,7 +5,7 @@ metadata:
   name: {{ include "springboot.appName" . }}
   namespace: {{ .Values.global.namespace }}
 spec:
-  ingressClassName: public-nginx
+  ingressClassName: {{ .Values.global.ingressClassName }}
   rules:
   - host: {{ include "springboot.userPrefix" . }}-ingress.{{ .Values.global.springboot.ingress.baseDomain }}
     http:

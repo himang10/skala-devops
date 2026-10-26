@@ -6,8 +6,9 @@
 global:
   location: "{{LOCATION}}"
   userName: "{{USER_NAME}}"                                          # 변경 가능 (예: "200", "001")
-  namespace: "{{CLASS_NAME}}"
-  appImageRegistry: "skala-registry.skala-{{LOCATION}}.com/{{CLASS_NAME}}"  # imageRegistry 대신 사용 (Bitnami global.imageRegistry 충돌 방지)
+  namespace: "{{NAMESPACE}}"
+  ingressClassName: "{{INGRESS_CLASS_NAME}}"
+  appImageRegistry: "skala-registry.skala-{{LOCATION}}.com/{{PROJECT_NAME}}"  # imageRegistry 대신 사용 (Bitnami global.imageRegistry 충돌 방지)
 
 # ===========================================================
 # Spring Boot API Server
@@ -23,7 +24,7 @@ springboot:
     mgmtPort: 8081
   ingress:
     enabled: true
-    baseDomain: "{{CLASS_NAME}}.skala-{{LOCATION}}.com"
+    baseDomain: "{{NAMESPACE}}.skala-{{LOCATION}}.com"
     clusterIssuer: "letsencrypt-prod"
   spring:
     profilesActive: "local"
