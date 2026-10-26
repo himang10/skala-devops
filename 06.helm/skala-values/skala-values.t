@@ -8,7 +8,7 @@ image:
   repository: skala-registry.skala-{{LOCATION}}.com/{{NAMESPACE}}/{{USER_NAME}}-webserver
   pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "1.0.buildkit-pod"
+  tag: "1.0.docker"
 
 imagePullSecrets: []
 nameOverride: ""
@@ -78,6 +78,9 @@ autoscaling:
   targetCPUUtilizationPercentage: 80
   # targetMemoryUtilizationPercentage: 80
 
+httpRoute:
+  enabled: false
+  
 nodeSelector: {}
 
 tolerations: []
